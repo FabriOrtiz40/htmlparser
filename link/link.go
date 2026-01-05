@@ -12,10 +12,15 @@ type Link struct {
 
 // Recibe HTML desde cualquier fuente y parsea. Devuelve todos los links encontrados
 func Parse(r io.Reader) ([]Link, error) {
-	// 1. Parsear el HTML
-	// 2. Recorrer el árbol
-	// 3. Encontrar <a>
-	// 4. Construir []Link
+		// 1. Parsear el HTML
+	doc, err := html.Parse(r)
+	if err != nil {
+		return nil, err
+	}
+
+	// Por ahora no hacemos nada con doc
+	_ = doc
+
 	return nil, nil
 }
 
