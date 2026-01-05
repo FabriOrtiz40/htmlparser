@@ -18,14 +18,26 @@ func Parse(r io.Reader) ([]Link, error) {
 		return nil, err
 	}
 
-	// Por ahora no hacemos nada con doc
-	_ = doc
+	var links []Link
+	extractLinks(doc, &links)
 
-	return nil, nil
+	return links, nil
 }
 
 // El Parse usa esta funcion para extraer todos los Links
-func extractLinks(n *html.Node, links *[]Link)
+func extractLinks(n *html.Node, links *[]Link){
+	if n == nil {
+		return
+	}
+
+	// Acá después vamos a hacer cosas con el nodo n
+
+	// DFS: primer hijo
+	extractLinks(n.FirstChild, links)
+
+	// DFS: siguiente hermano
+	extractLinks(n.NextSibling, links)
+}
 
 // Cuando encuentra un <a> llama a esta función
 func buildLink(n *html.Node) Link
