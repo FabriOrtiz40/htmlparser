@@ -45,10 +45,11 @@ func extractLinks(n *html.Node, links *[]Link) {
 
 		link := Link{
 			Href: href,
-			Text: extractText(n),
+			Text: cleanText(extractText(n)),
 		}
 
 		*links = append(*links, link)
+		return
 	}
 
 	// DFS: primer hijo
@@ -57,9 +58,6 @@ func extractLinks(n *html.Node, links *[]Link) {
 	// DFS: siguiente hermano
 	extractLinks(n.NextSibling, links)
 }
-
-// Cuando encuentra un <a> llama a esta función
-func buildLink(n *html.Node) Link
 
 // Y a esta
 func extractText(n *html.Node) string {
